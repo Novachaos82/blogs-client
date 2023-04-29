@@ -1,4 +1,6 @@
 import React,{useState,useEffect} from 'react'
+import Navbar from "../components/Navbar"
+import Head from "../components/Head"
 
 function Home() {
 
@@ -19,7 +21,10 @@ function Home() {
   }
   
   return (
-    <div>Home</div>
+    <div className='bg-[#eceaf6] w-full min-h-screen h-full pb-20 pl-36 pr-36'>
+      <Navbar/>
+      <Head/>
+    </div>
   )
 }
 
