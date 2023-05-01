@@ -1,6 +1,6 @@
 import Navbar from "../HomeComponents/Navbar";
 import LoginCardImage from "../../assets/login.png";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 function Login() {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
