@@ -1,10 +1,7 @@
 import blogsIcon from "../../assets/iconsHome1.svg";
 import { Link } from "react-router-dom";
+import { isLoggedIn } from "../loggedIncheck";
 function Navbar() {
-  const isLoggedIn = () => {
-    const token = localStorage.getItem("secret_token");
-    return token !== null;
-  };
   const logout = async () => {
     localStorage.removeItem("secret_token");
   };
@@ -28,20 +25,28 @@ function Navbar() {
 
       <ul className="flex text-xl flex-row gap-4 items-center ">
         {isLoggedIn() ? (
-          <li>
-            <Link to="/">
-              <p onClick={logout}>Logout</p>
-            </Link>
-          </li>
+          <div>
+            <li>
+              <Link to="/">
+                <p onClick={logout}>Logout</p>
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard">
+                <p>Dashboard</p>
+              </Link>
+            </li>
+          </div>
         ) : (
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
+          <div>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Signup</Link>
+            </li>
+          </div>
         )}
-
-        <li>
-          <Link to="/signup">Signup</Link>
-        </li>
       </ul>
     </div>
   );

@@ -7,7 +7,7 @@ function HomePosts({ posts }) {
   return (
     <div className="flex justify-center mt-20 ">
       {posts ? (
-        posts.map((post) => {
+        posts.slice(0, 3).map((post) => {
           return (
             <div className="flex justify-center w-full h-full" key={post._id}>
               <Link to={`/posts/${post._id}`}>
