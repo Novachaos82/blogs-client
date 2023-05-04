@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { isLoggedIn } from "../loggedIncheck";
-import jwt_decode from "jwt-decode";
+
 import Navbar from "../HomeComponents/Navbar";
 import DashBoardPost from "./DashBoardPost";
+import { token, userID } from "../utils/getUserid";
 
 function DashBoardMain() {
   const [posts, setPosts] = useState([]);
-  const token = localStorage.getItem("secret_token");
 
   useEffect(() => {
     getPosts();
@@ -23,9 +23,6 @@ function DashBoardMain() {
     }
   }
 
-  const decoded = jwt_decode(token);
-
-  const userID = decoded.user._id;
   //console.log(posts);
   //console.log(decoded.user._id);
   return (

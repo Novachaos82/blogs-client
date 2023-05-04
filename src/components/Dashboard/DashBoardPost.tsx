@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function DashBoardPost({ post, userId, token }) {
   console.log(post);
@@ -44,10 +45,17 @@ function DashBoardPost({ post, userId, token }) {
           <div>{post.title}</div>
           <div>
             {post.published ? (
-              <div onClick={handlePublish}>un publish</div>
+              <button onClick={handlePublish}>un publish</button>
             ) : (
-              <div onClick={handlePublish}>publish</div>
+              <button onClick={handlePublish}>publish</button>
             )}
+          </div>
+          <div>
+            <Link to={`/post/${post._id}/edit`}>Edit</Link>
+          </div>
+
+          <div>
+            <Link to={`/post/create`}>Create Post</Link>
           </div>
         </div>
       ) : (
