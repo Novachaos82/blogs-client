@@ -1,24 +1,7 @@
 import { useEffect, useState } from "react";
 import MainImg from "../../assets/mainImg.jpeg";
 import HomePosts from "./HomePosts";
-function Main() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    getPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  async function getPosts() {
-    try {
-      const response = await fetch("http://localhost:3000/api/posts/");
-      const data = await response.json();
-      //console.log(data.posts); // do something with the data
-      setPosts(data.posts);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+function Main({ posts }) {
   //posts.forEach((post) => {
   //  console.log(post);
   //});
@@ -27,7 +10,7 @@ function Main() {
     <div className="pl-36 pr-36 flex justify-center mt-52 flex-col ">
       <div className="flex justify-center items-center">
         <div className="bg-[#f6f5fb] flex justify-center w-[90%] rounded-3xl">
-          <div className="bg-black w-[50%]  flex justify-center rounded-3xl">
+          <div className="bg-black w-[50%]  flex justify-center rounded-3xl pointer-events-none">
             <img className="rounded-3xl" src={MainImg} alt="" />
           </div>
           <div className=" rounded-tr-3xl rounded-br-3xl w-[50%] bg-[#f6f5fb] flex justify-center p-12 flex-col gap-4">

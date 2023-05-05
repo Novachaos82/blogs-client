@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .publish-btn {
+    @apply bg-[#e3e9e5] p-2 rounded-md mt-4;
+  }
+}

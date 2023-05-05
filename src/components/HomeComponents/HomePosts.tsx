@@ -10,7 +10,7 @@ function HomePosts({ posts }) {
         posts.slice(0, 3).map((post) => {
           return (
             <div className="flex justify-center w-full h-full" key={post._id}>
-              <Link to={`/posts/${post._id}`}>
+              <Link className="flex justify-center " to={`/posts/${post._id}`}>
                 <div className="flex flex-col w-2/3 max-w-lg h-full">
                   <img
                     className="rounded-tl-lg rounded-tr-lg w-full h-[100%] object-cover object-center my-4"
