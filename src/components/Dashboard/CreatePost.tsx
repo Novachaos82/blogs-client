@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { token } from "../utils/getUserid";
+import Navbar from "../HomeComponents/Navbar";
 
 function CreatePost() {
   const titleRef = useRef(null);
@@ -36,16 +37,34 @@ function CreatePost() {
   };
   return (
     <div>
-      <form action="" onSubmit={handlesubmit}>
-        <input ref={titleRef} type="text" placeholder="title" name="title" />
-        <input
-          ref={detailsRef}
-          type="textarea"
-          placeholder="detauks"
-          name="details"
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <Navbar />
+      <div className="form-outer">
+        <form action="" onSubmit={handlesubmit} className="form-div">
+          <label htmlFor="title" className="label-classes">
+            Title
+          </label>
+          <input
+            ref={titleRef}
+            type="text"
+            placeholder="title"
+            name="title"
+            className="input-classes"
+          />
+          <label htmlFor="details" className="label-classes">
+            {" "}
+            Details
+          </label>
+          <textarea
+            className="input-classes"
+            ref={detailsRef}
+            placeholder="details"
+            name="details"
+          />
+          <button className="submit-btn" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

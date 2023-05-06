@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { token } from "../utils/getUserid";
+import Navbar from "../HomeComponents/Navbar";
 
 function DashboardPostEdit() {
   const [post, setPost] = useState();
@@ -86,29 +87,47 @@ function DashboardPostEdit() {
       console.log(error);
     }
   };
+
   return (
     <div>
-      <form action="" onSubmit={handleForm}>
-        <input
-          ref={titleRef}
-          type="text"
-          id="title"
-          name="title"
-          placeholder="title"
-        />
-        <input
-          ref={detailsRef}
-          type="textarea"
-          name="details"
-          id="details"
-          placeholder="details"
-        />
-        <button type="submit">submit</button>
-      </form>
+      <Navbar />
+      <div className="flex flex-col justify-center">
+        <div className="form-outer">
+          <form action="" onSubmit={handleForm} className="form-div">
+            <label htmlFor="title" className="label-classes">
+              Title
+            </label>
+            <input
+              className="input-classes"
+              value={post?.title}
+              ref={titleRef}
+              type="text"
+              id="title"
+              name="title"
+              placeholder="title"
+            />
 
-      <button className="deleteBtn" onClick={deletePost}>
-        Delete Post
-      </button>
+            <label htmlFor="details" className="label-classes">
+              {" "}
+              Details
+            </label>
+            <textarea
+              value={post?.details}
+              className="input-classes"
+              ref={detailsRef}
+              name="details"
+              id="details"
+              placeholder="details"
+            />
+            <button className="submit-btn" type="submit">
+              submit
+            </button>
+            <button className="delete-btn mt-10" onClick={deletePost}>
+              Delete Post
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

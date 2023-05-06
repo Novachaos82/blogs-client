@@ -11,12 +11,15 @@ function Post({ posts }) {
         {posts.map((post) => {
           const isoString = post.date;
           const date = new Date(isoString);
+          console.log(date.toLocaleString());
           const formattedDate = date.toLocaleDateString();
           const formattedTime = date.toLocaleTimeString();
+
           return (
             <Link
               className="bg-white flex flex-col  w-[30%] min-h-[25vh]  h-fit  rounded-md pl-4 pr-4 justify-center shadow-lg pb-6 pt-4"
               to={`/posts/${post._id}`}
+              key={post._id}
             >
               <div className="flex justify-center text-center">
                 <div className="text-3xl font-bold">{post.title}</div>
