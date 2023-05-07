@@ -1,7 +1,10 @@
 import Navbar from "../HomeComponents/Navbar";
 import LoginCardImage from "../../assets/login.png";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Login() {
+  const [error, setError] = useState();
+  const navigate = useNavigate();
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -20,16 +23,20 @@ function Login() {
         body: JSON.stringify({ username, password }),
       });
       if (!response.ok) {
-        throw new Error("response error");
+        const error = await response.json();
+        setError(error);
+        throw new Error("response err");
       }
       const result = await response.json();
       localStorage.setItem("secret_token", result.token);
       console.log(result.token);
+      navigate("/");
       return result;
     } catch (err) {
-      console.error("There was a problem with the fetch operation:", err);
+      console.error("error");
     }
   };
+
   return (
     <div className="bg-[#eceaf6]">
       <Navbar />
@@ -52,10 +59,13 @@ function Login() {
               </label>
               <input
                 ref={usernameRef}
-                className="rounded-md p-3 border-solid border-[1px] border-gray-200"
+                className={`rounded-md p-3 border-solid border-[1px] ${
+                  error ? `border-red-400` : `border-gray-200`
+                }`}
                 type="text"
                 id="username"
                 name="username"
+                required
               />
 
               <label className=" text-lg pb-2 pt-2 " htmlFor="password">
@@ -63,11 +73,17 @@ function Login() {
               </label>
               <input
                 ref={passwordRef}
-                className="rounded-md  p-3  border-solid border-[1px] border-gray-200 relative"
+                className={`rounded-md p-3 border-solid border-[1px] ${
+                  error ? `border-red-400` : `border-gray-200`
+                }`}
                 type="password"
                 id="password"
                 name="password"
+                required
               />
+              <div className="text-red-500 transition-all duration-200 font-semibold text-lg mt-4">
+                {error?.error}
+              </div>
 
               {/*<label className=" text-lg pb-2 pt-2 " htmlFor="confirmPassword">
                 Confirm Password

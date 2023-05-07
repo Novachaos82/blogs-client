@@ -1,9 +1,11 @@
 import blogsIcon from "../../assets/iconsHome1.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { isLoggedIn } from "../loggedIncheck";
 function Navbar() {
+  const navigate = useNavigate();
   const logout = async () => {
     localStorage.removeItem("secret_token");
+    navigate("/");
   };
   return (
     <div className="w-full flex items-center justify-between flex-column font-semibold pt-8 pb-8 tracking-wider pl-36 pr-36">

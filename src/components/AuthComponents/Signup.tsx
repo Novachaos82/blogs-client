@@ -2,6 +2,7 @@ import Navbar from "../HomeComponents/Navbar";
 import LoginCardImage from "../../assets/signup.png";
 import { useEffect, useRef, useState } from "react";
 function Signup() {
+  const [error, setError] = useState();
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -19,15 +20,19 @@ function Signup() {
         body: JSON.stringify({ username, password }),
       });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const err = await response.json();
+        setError(err);
+        return null;
       }
       const result = await response.json();
-      console.log(result);
+
       return result;
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
   };
+
+  console.log(error);
 
   return (
     <div className="bg-[#eceaf6]">
@@ -56,21 +61,33 @@ function Signup() {
               </label>
               <input
                 ref={usernameRef}
-                className="rounded-md p-3 border-solid border-[1px] border-gray-200"
+                className={`rounded-md p-3 border-solid border-[1px] ${
+                  error ? `border-red-400` : `border-gray-200`
+                }`}
                 type="text"
                 id="username"
                 name="username"
+                required
               />
               <label className=" text-lg pb-2 pt-2 " htmlFor="password">
                 Password
               </label>
               <input
                 ref={passwordRef}
-                className="rounded-md  p-3  border-solid border-[1px] border-gray-200"
+                className={`rounded-md p-3 border-solid border-[1px] ${
+                  error ? `border-red-400` : `border-gray-200`
+                }`}
                 type="password"
                 id="password"
                 name="password"
+                required
               />
+
+              <div className="flex flex-col text-red-400 font-semibold transition-all duration-200">
+                {error?.errors.map((err, index) => {
+                  return <div key={index}>{err.msg}</div>;
+                })}
+              </div>
 
               <button
                 type="submit"
