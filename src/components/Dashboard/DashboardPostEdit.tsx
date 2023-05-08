@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { token } from "../utils/getUserid";
 import Navbar from "../HomeComponents/Navbar";
 
 function DashboardPostEdit() {
+  const navigate = useNavigate();
   const [post, setPost] = useState();
   const { id } = useParams();
 
@@ -57,6 +58,7 @@ function DashboardPostEdit() {
       );
 
       const data = await response.json();
+      navigate("/dashboard");
       console.log(response);
       if (data.error) {
         console.log(data.error);
@@ -79,6 +81,7 @@ function DashboardPostEdit() {
       );
 
       const data = await response.json();
+      navigate("/dashboard");
       console.log(response);
       if (data.error) {
         console.log(data.error);
@@ -86,6 +89,11 @@ function DashboardPostEdit() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const scHeight = e.target.scrollHeight;
+    detailsRef.current.style.height = `${scHeight}px`;
   };
 
   return (
@@ -99,12 +107,13 @@ function DashboardPostEdit() {
             </label>
             <input
               className="input-classes"
-              value={post?.title}
+              defaultValue={post?.title}
               ref={titleRef}
               type="text"
               id="title"
               name="title"
               placeholder="title"
+              required
             />
 
             <label htmlFor="details" className="label-classes">
@@ -112,12 +121,14 @@ function DashboardPostEdit() {
               Details
             </label>
             <textarea
-              value={post?.details}
+              onInput={handleInputChange}
+              defaultValue={post?.details}
               className="input-classes"
               ref={detailsRef}
               name="details"
               id="details"
               placeholder="details"
+              required
             />
             <button className="submit-btn" type="submit">
               submit

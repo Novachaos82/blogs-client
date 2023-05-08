@@ -30,9 +30,11 @@ function DashBoardMain() {
     <div className="bg-[#eceaf6] min-h-screen h-full">
       <Navbar />
       <div className="flex justify-center">
-        <div className="bg-[#5948f7] p-2 text-white font-semibold mb-8 rounded-md hover:brightness-75 transition-all duration-200 hover:-translate-y-1">
-          <Link to={`/post/create`}>Create Post</Link>
-        </div>
+        <Link to={`/post/create`}>
+          <div className="bg-[#5948f7] p-2 text-white font-semibold mb-8 rounded-md hover:brightness-75 transition-all duration-200 hover:-translate-y-1">
+            Create Post
+          </div>
+        </Link>
       </div>
       <div className="flex justify-center gap-4 flex-col ">
         {posts.map((post, index) => {
