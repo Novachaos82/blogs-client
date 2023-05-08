@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function DashBoardPost({ post, userId, token }) {
+function DashBoardPost({ post, userId, token, onPostUpdate }) {
   console.log(post);
   console.log(userId);
 
@@ -29,6 +29,7 @@ function DashBoardPost({ post, userId, token }) {
       );
 
       const data = await response.json();
+      onPostUpdate();
       console.log(response);
       if (data.error) {
         console.log(data.error);

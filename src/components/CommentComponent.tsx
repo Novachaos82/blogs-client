@@ -48,7 +48,7 @@ function CommentComponent() {
       if (!response.ok) {
         throw new Error("response error on single post page");
       }
-
+      commentData();
       const result = await response.json();
 
       console.log(result);

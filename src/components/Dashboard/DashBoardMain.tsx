@@ -42,6 +42,7 @@ function DashBoardMain() {
               token={token}
               userId={userID}
               post={post}
+              onPostUpdate={getPosts}
             />
           );
         })}
