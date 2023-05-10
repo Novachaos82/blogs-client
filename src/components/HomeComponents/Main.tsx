@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import MainImg from "../../assets/mainImg.jpeg";
 import HomePosts from "./HomePosts";
-function Main({ posts }) {
+
+interface Props {
+  posts: PostType[];
+}
+const Main: React.FC<Props> = ({ posts }) => {
   //posts.forEach((post) => {
   //  console.log(post);
   //});
@@ -40,6 +44,6 @@ function Main({ posts }) {
       </div>
     </div>
   );
-}
+};
 
 export default Main;

@@ -1,19 +1,28 @@
 import Navbar from "../HomeComponents/Navbar";
 import LoginCardImage from "../../assets/login.png";
-import { useRef, useState } from "react";
+import { useRef, useState, FormEventHandler, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-function Login() {
-  const [error, setError] = useState();
-  const navigate = useNavigate();
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
 
-  const handleLogin = (e: Event) => {
+type error = {
+  error: string;
+  status: number;
+};
+function Login() {
+  const [error, setError] = useState<error>();
+  const navigate = useNavigate();
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const handleLogin: FormEventHandler<HTMLFormElement> = (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
 
-    login(usernameRef.current.value, passwordRef.current.value);
+    if (usernameRef.current && passwordRef.current) {
+      login(usernameRef.current.value, passwordRef.current.value);
+    }
   };
-  const login = async (username: object, password: object) => {
+  const login = async (username: string, password: string) => {
     try {
       const response = await fetch("http://localhost:3000/api/login/", {
         method: "POST",
@@ -29,14 +38,14 @@ function Login() {
       }
       const result = await response.json();
       localStorage.setItem("secret_token", result.token);
-      console.log(result.token);
+      //console.log(result.token);
       navigate("/");
       return result;
     } catch (err) {
-      console.error("error");
+      //console.error("error");
     }
   };
-
+  //console.log(error);
   return (
     <div className="bg-[#eceaf6]">
       <Navbar />

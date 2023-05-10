@@ -1,15 +1,21 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  FormEventHandler,
+  FormEvent,
+} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { token } from "../utils/getUserid";
 import Navbar from "../HomeComponents/Navbar";
 
 function DashboardPostEdit() {
   const navigate = useNavigate();
-  const [post, setPost] = useState();
+  const [post, setPost] = useState<PostType>();
   const { id } = useParams();
 
-  const titleRef = useRef(null);
-  const detailsRef = useRef(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const detailsRef = useRef<HTMLTextAreaElement>(null);
   const bearer = `Bearer ${token}`;
 
   console.log(id);
@@ -23,7 +29,7 @@ function DashboardPostEdit() {
         throw new Error("resp error");
       }
       const data = await response.json();
-      //console.log(data.posts); // do something with the data
+      console.log(data.posts); // do something with the data
       setPost(data.post);
     } catch (error) {
       console.error(error);
@@ -31,15 +37,20 @@ function DashboardPostEdit() {
   }
   console.log(post);
 
-  const handleForm = (e: Event) => {
+  const handleForm: FormEventHandler<HTMLFormElement> = (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    changeSubmit(titleRef.current.value, detailsRef.current.value);
+
+    if (titleRef.current && detailsRef.current) {
+      changeSubmit(titleRef.current.value, detailsRef.current.value);
+    }
   };
 
-  const changeSubmit = async (title, details) => {
+  const changeSubmit = async (title: string, details: string) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/posts/${post._id}`,
+        `http://localhost:3000/api/posts/${post?._id}`,
         {
           method: "PUT",
           headers: {
@@ -47,30 +58,30 @@ function DashboardPostEdit() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            _id: post._id,
+            _id: post?._id,
             title: title,
-            date: post.date,
+            date: post?.date,
             details: details,
-            user_name: post.user_name,
-            published: post.published,
+            user_name: post?.user_name,
+            published: post?.published,
           }),
         }
       );
 
       const data = await response.json();
       navigate("/dashboard");
-      console.log(response);
+      //console.log(response);
       if (data.error) {
-        console.log(data.error);
+        //console.log(data.error);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
   const deletePost = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/posts/${post._id}`,
+        `http://localhost:3000/api/posts/${post?._id}`,
         {
           method: "DELETE",
           headers: {
@@ -82,18 +93,20 @@ function DashboardPostEdit() {
 
       const data = await response.json();
       navigate("/dashboard");
-      console.log(response);
+      //console.log(response);
       if (data.error) {
-        console.log(data.error);
+        //console.log(data.error);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const scHeight = e.target.scrollHeight;
-    detailsRef.current.style.height = `${scHeight}px`;
+    if (detailsRef.current) {
+      detailsRef.current.style.height = `${scHeight}px`;
+    }
   };
 
   return (

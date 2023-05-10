@@ -7,7 +7,7 @@ import { token, userID } from "../utils/getUserid";
 import { Link } from "react-router-dom";
 
 function DashBoardMain() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
     getPosts();
@@ -18,9 +18,10 @@ function DashBoardMain() {
       const response = await fetch("http://localhost:3000/api/posts/");
       const data = await response.json();
       //console.log(data.posts); // do something with the data
+      //console.log(data.posts);
       setPosts(data.posts);
     } catch (error) {
-      console.error(error);
+      //console.error(error);
     }
   }
 

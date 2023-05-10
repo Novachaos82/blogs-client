@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function DashBoardPost({ post, userId, token, onPostUpdate }) {
-  console.log(post);
-  console.log(userId);
+interface Props {
+  post: PostType;
+  userId?: string | null | undefined;
+  token?: string | null | undefined;
+  onPostUpdate: () => void;
+}
+
+function DashBoardPost({ post, userId, token, onPostUpdate }: Props) {
+  //console.log(post);
+  //console.log(userId);
 
   const bearer = `Bearer ${token}`;
 
@@ -32,10 +39,10 @@ function DashBoardPost({ post, userId, token, onPostUpdate }) {
       onPostUpdate();
       console.log(response);
       if (data.error) {
-        console.log(data.error);
+        //console.log(data.error);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

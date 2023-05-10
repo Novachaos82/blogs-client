@@ -1,6 +1,10 @@
 import mainImg from "../../assets/mainImg.jpeg";
 import { Link } from "react-router-dom";
-function HomePosts({ posts }) {
+
+interface Props {
+  posts: PostType[];
+}
+const HomePosts: React.FC<Props> = ({ posts }) => {
   posts.forEach((post) => {
     console.log(post.title);
   });
@@ -28,6 +32,6 @@ function HomePosts({ posts }) {
       )}
     </div>
   );
-}
+};
 
 export default HomePosts;

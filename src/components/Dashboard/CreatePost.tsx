@@ -1,18 +1,22 @@
-import React, { useRef } from "react";
+import React, { FormEvent, FormEventHandler, useRef } from "react";
 import { token } from "../utils/getUserid";
 import Navbar from "../HomeComponents/Navbar";
 
 function CreatePost() {
-  const titleRef = useRef(null);
-  const detailsRef = useRef(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const detailsRef = useRef<HTMLTextAreaElement>(null);
 
   const bearer = `Bearer ${token}`;
 
-  const handlesubmit = (e: Event) => {
+  const handlesubmit: FormEventHandler<HTMLFormElement> = (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    createSubmit(titleRef.current.value, detailsRef.current.value);
+    if (titleRef.current && detailsRef.current) {
+      createSubmit(titleRef.current.value, detailsRef.current.value);
+    }
   };
-  const createSubmit = async (title, details) => {
+  const createSubmit = async (title: string, details: string) => {
     try {
       const response = await fetch(`http://localhost:3000/api/posts`, {
         method: "POST",
@@ -32,7 +36,7 @@ function CreatePost() {
       const result = await response.json();
       return result;
     } catch (err) {
-      console.error(err);
+      //console.error(err);
     }
   };
   return (

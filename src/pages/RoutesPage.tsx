@@ -22,6 +22,7 @@ function RoutesPage() {
       const data = await response.json();
       //console.log(data.posts); // do something with the data
       setPosts(data.posts);
+      //console.log(data.posts);
     } catch (error) {
       console.error(error);
     }

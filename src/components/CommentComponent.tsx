@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function CommentComponent() {
-  const commentRef = useRef(null);
-  const usernameRef = useRef(null);
+  const commentRef = useRef<HTMLTextAreaElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<commentType[]>([]);
   useEffect(() => {
     commentData();
   }, []);
@@ -21,7 +21,7 @@ function CommentComponent() {
       const result = await response.json();
 
       setComments(result.comments);
-
+      console.log(result.comments);
       return result;
     } catch (err) {
       console.error(err);
@@ -32,7 +32,7 @@ function CommentComponent() {
     e.preventDefault();
     postComment(commentRef.current.value, usernameRef.current.value);
   };
-  const postComment = async (comment, username) => {
+  const postComment = async (comment: string, username) => {
     try {
       const response = await fetch(
         `http://localhost:3000/api/posts/${id}/comments`,
@@ -51,7 +51,7 @@ function CommentComponent() {
       commentData();
       const result = await response.json();
 
-      console.log(result);
+      //console.log(result);
 
       return result;
     } catch (err) {
@@ -59,7 +59,7 @@ function CommentComponent() {
     }
   };
 
-  console.log(comments);
+  //console.log(comments);
   return (
     <div className="flex flex-col justify-center mt-16">
       <div className="flex  flex-col gap-4">

@@ -1,16 +1,38 @@
 import Navbar from "../HomeComponents/Navbar";
 import LoginCardImage from "../../assets/signup.png";
-import { useEffect, useRef, useState } from "react";
-function Signup() {
-  const [error, setError] = useState();
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
+import {
+  FormEventHandler,
+  useEffect,
+  useRef,
+  useState,
+  FormEvent,
+} from "react";
 
-  const handleSignup = (e: Event) => {
+type errorType = {
+  errors: ErrorObject[];
+};
+
+type ErrorObject = {
+  location: string;
+  msg: string;
+  path: string;
+  type: string;
+  value: string;
+};
+function Signup() {
+  const [error, setError] = useState<errorType>();
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const handleSignup: FormEventHandler<HTMLFormElement> = (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    signup(usernameRef.current.value, passwordRef.current.value);
+    if (usernameRef.current && passwordRef.current) {
+      signup(usernameRef.current.value, passwordRef.current.value);
+    }
   };
-  const signup = async (username: object, password: object) => {
+  const signup = async (username: string, password: string) => {
     try {
       const response = await fetch("http://localhost:3000/api/signup/", {
         method: "POST",
@@ -25,14 +47,14 @@ function Signup() {
         return null;
       }
       const result = await response.json();
-
+      setError(undefined);
       return result;
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
   };
 
-  console.log(error);
+  //console.log(error);
 
   return (
     <div className="bg-[#eceaf6]">

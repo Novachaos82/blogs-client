@@ -5,7 +5,7 @@ import Navbar from "../components/HomeComponents/Navbar";
 
 function PostPage() {
   const { id } = useParams();
-  const [post, setPost] = useState();
+  const [post, setPost] = useState<PostType>();
   //console.log(id);
 
   useEffect(() => {
@@ -37,7 +37,9 @@ function PostPage() {
           <div className="text-5xl font-bold capitalize text-center">
             {post?.title}
           </div>
-          <div className="mt-16 text-lg font-medium">{post?.details}</div>
+          <div className="mt-16 text-lg font-medium break-words">
+            {post?.details}
+          </div>
         </div>
       </div>
       <div className="flex justify-center">

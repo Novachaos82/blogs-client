@@ -3,7 +3,10 @@ import Navbar from "../components/HomeComponents/Navbar";
 import Head from "../components/HomeComponents/Head";
 import Main from "../components/HomeComponents/Main";
 
-function Home({ posts }) {
+interface Props {
+  posts: PostType[];
+}
+const Home: React.FC<Props> = ({ posts }) => {
   if (localStorage.getItem("secret_token") === null) {
     localStorage.clear();
   }
@@ -14,6 +17,6 @@ function Home({ posts }) {
       <Main posts={posts} />
     </div>
   );
-}
+};
 
 export default Home;
