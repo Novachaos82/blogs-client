@@ -1,11 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  FormEvent,
+  FormEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useParams } from "react-router-dom";
 
 function CommentComponent() {
   const commentRef = useRef<HTMLTextAreaElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
-  const [comments, setComments] = useState<commentType[]>([]);
+  const [comments, setComments] = useState<commentObject[]>([]);
   useEffect(() => {
     commentData();
   }, []);
@@ -28,11 +34,15 @@ function CommentComponent() {
     }
   };
 
-  const handleCommentSubmit = (e: Event) => {
+  const handleCommentSubmit: FormEventHandler<HTMLFormElement> = (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    postComment(commentRef.current.value, usernameRef.current.value);
+    if (commentRef.current && usernameRef.current) {
+      postComment(commentRef.current.value, usernameRef.current.value);
+    }
   };
-  const postComment = async (comment: string, username) => {
+  const postComment = async (comment: string, username: string) => {
     try {
       const response = await fetch(
         `http://localhost:3000/api/posts/${id}/comments`,
