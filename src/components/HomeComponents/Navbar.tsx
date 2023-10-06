@@ -8,7 +8,7 @@ function Navbar() {
     navigate("/");
   };
   return (
-    <div className="w-full flex items-center justify-between flex-column font-semibold pt-8 pb-8 tracking-wider pl-36 pr-36">
+    <div className="w-full flex items-center justify-between flex-row font-semibold pt-8 pb-8 tracking-wider pl-36 pr-36 max-sm:(p-0 flex-col)">
       <ul className="flex flex-row gap-4 items-center text-3xl  text-[#56538b] font-bold">
         <img src={blogsIcon} alt="" className=" w-16 h-16 " />
         <p>Blogs</p>
@@ -27,7 +27,7 @@ function Navbar() {
 
       <ul className="flex text-xl flex-row gap-4 items-center ">
         {isLoggedIn() ? (
-          <div>
+          <div className="flex gap-4">
             <li>
               <Link to="/">
                 <p onClick={logout}>Logout</p>
@@ -40,7 +40,7 @@ function Navbar() {
             </li>
           </div>
         ) : (
-          <div>
+          <div className="flex gap-4">
             <li>
               <Link to="/login">Login</Link>
             </li>

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -46,13 +45,15 @@ function DashBoardPost({ post, userId, token, onPostUpdate }: Props) {
     }
   };
 
+  console.log(post);
+
   const isoString = post.date;
   const date = new Date(isoString);
   const formattedDate = date.toLocaleDateString();
   const formattedTime = date.toLocaleTimeString();
   return (
     <div className="flex justify-center gap-4 items-center">
-      {post.user_name._id === userId ? (
+      {post?.user_name?._id === userId ? (
         <div className="bg-[#ffffff] w-[40%] flex flex-col justify-center rounded-md items-center p-4 shadow-md">
           <div className="text-2xl font-bold">{post.title}</div>
           <div className="flex gap-2 text-gray-400">

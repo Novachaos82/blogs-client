@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import MainImg from "../../assets/mainImg.jpeg";
 import HomePosts from "./HomePosts";
 
@@ -22,16 +21,16 @@ const Main: React.FC<Props> = ({ posts }) => {
               {posts[0]?.title}
             </div>
             <div className="text-md text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
-              numquam accusantium culpa expedita, amet distinctio at quos
-              commodi delectus illo labore beatae odio voluptate, quasi soluta
-              tempore quas recusandae perspiciatis vel ab blanditiis cum est
-              maiores! Voluptates culpa aspernatur aliquam voluptatum totam,
-              perferendis aut libero quidem optio itaque, voluptatibus fuga
-              pariatur, sed atque dolor. Doloribus unde suscipit soluta
-              dignissimos, fugiat rem sed dolor repudiandae id tempora
-              laudantium assumenda corrupti, cupiditate a alias ex asperiores
-              voluptatem molestias est fuga in voluptate.
+              In today's fast-paced digital landscape, adaptability is key. From
+              the ever-evolving world of social media to the intricacies of
+              blockchain technology, our blog is your compass for navigating the
+              dynamic realm of the internet. Delve into insightful articles that
+              decode complex concepts, uncover the secrets of successful
+              entrepreneurship, and explore the latest breakthroughs in science
+              and innovation. Join us on a journey of discovery, where we bridge
+              the gap between knowledge and curiosity. With a commitment to
+              providing valuable content, we aim to empower and inspire you to
+              thrive in an ever-changing world.
             </div>
           </div>
         </div>
